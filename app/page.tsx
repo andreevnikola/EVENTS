@@ -1,4 +1,4 @@
-import Footer from "@/components/Footer";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -22,12 +22,13 @@ export default function Home() {
             </p>
             <div className="btn-group">
               <a className="btn btn-active">Join room</a>
-              <a className="btn btn-outline">Create room</a>
+              <Link className="btn btn-outline" href="/room/create">
+                Create room
+              </Link>
             </div>
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

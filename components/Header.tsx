@@ -25,6 +25,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function SideMenu() {
   let [opened, setOpened] = useState(false);
@@ -41,28 +42,49 @@ function SideMenu() {
         <label htmlFor="my-drawer" className="btn btn-primary drawer-button">
           <FontAwesomeIcon
             icon={faBars}
-            className={`-rotate-${opened ? "90" : "0"} transition-all`}
+            className={`-rotate-${opened ? "45" : "0"} transition-all`}
           />
         </label>
       </div>
       <div
         className="drawer-side mt-[64px] overflow-auto"
         style={{ height: "calc(100% + -64px)" }}
-        onClick={() => {
-          setOpened(false);
-        }}
       >
-        <label htmlFor="my-drawer" className="drawer-overlay"></label>
+        <label
+          htmlFor="my-drawer"
+          className="drawer-overlay"
+          onClick={() => {
+            setOpened(false);
+          }}
+        ></label>
         <ul className="menu p-4 w-80 bg-base-200 text-base-content h-fit min-h-full overflow-auto">
           <div className="divider hidden max-xs:flex">Main Navigation</div>
           <li className="hidden max-xs:block">
-            <Link href="/aboutus" className="font-semibold">
+            <Link
+              href="/aboutus"
+              className="font-semibold"
+              onClick={() => {
+                document?.querySelector(".drawer-overlay")?.click();
+              }}
+            >
               About Us
             </Link>
-            <Link href="/pricing" className="font-bold">
+            <Link
+              href="/pricing"
+              className="font-bold"
+              onClick={() => {
+                document?.querySelector(".drawer-overlay")?.click();
+              }}
+            >
               Pricing
             </Link>
-            <Link href="/howitworks" className="font-semibold">
+            <Link
+              href="/howitworks"
+              className="font-semibold"
+              onClick={() => {
+                document?.querySelector(".drawer-overlay")?.click();
+              }}
+            >
               How it works?
             </Link>
           </li>
@@ -112,9 +134,14 @@ function SideMenu() {
             </a>
           </li>
           <li>
-            <a>
+            <Link
+              href="/room/create"
+              onClick={() => {
+                document?.querySelector(".drawer-overlay")?.click();
+              }}
+            >
               <FontAwesomeIcon icon={faCirclePlus} /> Create Room
-            </a>
+            </Link>
           </li>
           <li>
             <a>
@@ -155,8 +182,9 @@ function SideMenu() {
 
 export default function Header() {
   const router = useRouter();
+  const theme = useSelector((state: any) => state.theme.theme);
   return (
-    <header className="h-16">
+    <header className="h-[75px]">
       <nav className="fixed top-0 w-full z-10">
         <div className="navbar bg-base-100 justify-between">
           <div className="flex-1 flex-grow-0 w-fit gap-1">
@@ -165,9 +193,13 @@ export default function Header() {
               onClick={() => {
                 router.push("/");
               }}
-              className="btn btn-ghost normal-case text-xl w-fit"
+              className="btn btn-ghost normal-case text-xl z-10"
             >
-              ShareIT
+              <img
+                src={`/branding/${theme}_theme/logo.png`}
+                alt=" ShareIT"
+                className="h-full w-auto z-0"
+              />
             </button>
           </div>
           <div className="flex-1 gap-7 flex-grow-1 justify-center hidden xs:flex">
