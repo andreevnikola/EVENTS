@@ -1,11 +1,9 @@
-"use client";
-
 import Footer from "@/components/Footer";
 
-export default function Pricing() {
+export default function NotFoundPage() {
   return (
     <>
-      <h1>Pricing</h1>
+      <h1>NOT FOUND</h1>
       <Footer />
     </>
   );

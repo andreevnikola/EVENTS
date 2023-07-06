@@ -2,8 +2,6 @@ import { ClerkProvider } from "@clerk/nextjs";
 import Header from "../components/Header";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { store } from "../redux/store";
-import { setTheme } from "@/redux/theme";
 import Providers from "../components/Provider";
 import CustomHtmlTag from "@/components/CustomHtmlTag";
 
@@ -19,14 +17,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  let storageTheme: string = "";
-  if (typeof window !== "undefined") {
-    storageTheme = localStorage.getItem("favoriteNumber") || "";
-  }
-  store.dispatch(
-    setTheme(storageTheme === "halloween" ? "halloween" : "cupcake")
-  );
-
   return (
     <ClerkProvider>
       <Providers>

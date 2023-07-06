@@ -4,48 +4,191 @@ import { store } from "@/redux/store";
 import { changedTheme } from "@/redux/theme";
 import {
   SignInButton,
-  SignOutButton,
   SignUpButton,
   SignedIn,
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
 import {
+  faBars,
+  faBell,
+  faBuilding,
+  faCirclePlus,
+  faCompass,
+  faDoorOpen,
+  faPersonDigging,
   faRightToBracket,
   faUser,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
+function SideMenu() {
+  let [opened, setOpened] = useState(false);
+
+  return (
+    <div className="drawer">
+      <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+      <div
+        className="drawer-content"
+        onClick={() => {
+          setOpened(!opened);
+        }}
+      >
+        <label htmlFor="my-drawer" className="btn btn-primary drawer-button">
+          <FontAwesomeIcon
+            icon={faBars}
+            className={`-rotate-${opened ? "90" : "0"} transition-all`}
+          />
+        </label>
+      </div>
+      <div
+        className="drawer-side mt-[64px] overflow-auto"
+        style={{ height: "calc(100% + -64px)" }}
+        onClick={() => {
+          setOpened(false);
+        }}
+      >
+        <label htmlFor="my-drawer" className="drawer-overlay"></label>
+        <ul className="menu p-4 w-80 bg-base-200 text-base-content h-fit min-h-full overflow-auto">
+          <div className="divider hidden max-xs:flex">Main Navigation</div>
+          <li className="hidden max-xs:block">
+            <Link href="/aboutus" className="font-semibold">
+              About Us
+            </Link>
+            <Link href="/pricing" className="font-bold">
+              Pricing
+            </Link>
+            <Link href="/howitworks" className="font-semibold">
+              How it works?
+            </Link>
+          </li>
+          <div className="divider">
+            <FontAwesomeIcon icon={faUser} /> Profile
+          </div>
+          <li>
+            <a>
+              <FontAwesomeIcon icon={faBell} /> Notifications
+            </a>
+          </li>
+          <li>
+            <ul className="menu bg-base-200 w-full rounded-box ml-0">
+              <li>
+                <h2 className="menu-title text-info-content cursor-pointer hover:bg-info-content hover:text-base-100 rounded-sm ">
+                  <FontAwesomeIcon icon={faBuilding} /> My Rooms
+                </h2>
+                <ul>
+                  <li>
+                    <a className="flex justify-between">
+                      <p className="w-fit">The gigga niggas room</p>
+                      <p className="w-fit">👶🏿</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a className="flex justify-between">
+                      <p className="w-fit">Trip to ohio</p>
+                      <p className="w-fit">🦈</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a className="flex justify-between">
+                      <p className="w-fit">Over everest</p>
+                      <p className="w-fit">🏔</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <div className="divider">
+            <FontAwesomeIcon icon={faPersonDigging} /> Activities
+          </div>
+          <li>
+            <a>
+              <FontAwesomeIcon icon={faDoorOpen} /> Join Room
+            </a>
+          </li>
+          <li>
+            <a>
+              <FontAwesomeIcon icon={faCirclePlus} /> Create Room
+            </a>
+          </li>
+          <li>
+            <a>
+              <FontAwesomeIcon icon={faCompass} /> Explore Public Rooms
+            </a>
+          </li>
+          <div className="divider"></div>
+          <div className="form-control relative w-full -ml-1 bg-transparent focus:bg-transparent">
+            <div className="input-group w-full">
+              <input
+                type="text"
+                placeholder="Search Rooms…"
+                className="input input-bordered"
+              />
+              <button className="btn btn-primary btn-square">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </ul>
+      </div>
+    </div>
+  );
+}
 
 export default function Header() {
+  const router = useRouter();
   return (
-    <header className="h-12">
+    <header className="h-16">
       <nav className="fixed top-0 w-full z-10">
-        <div className="navbar bg-base-100">
-          <div className="flex-1 flex-grow-0 w-fit">
-            <a href="/" className="btn btn-ghost normal-case text-xl w-fit">
+        <div className="navbar bg-base-100 justify-between">
+          <div className="flex-1 flex-grow-0 w-fit gap-1">
+            <SideMenu />
+            <button
+              onClick={() => {
+                router.push("/");
+              }}
+              className="btn btn-ghost normal-case text-xl w-fit"
+            >
               ShareIT
-            </a>
+            </button>
           </div>
-          <div className="flex-1 gap-7 flex-grow-1 justify-center">
-            <a
+          <div className="flex-1 gap-7 flex-grow-1 justify-center hidden xs:flex">
+            <Link
               href="/aboutus"
               className="font-semibold hover-underline-animation"
             >
               About Us
-            </a>
-            <a
+            </Link>
+            <Link
               href="/pricing"
               className="font-semibold hover-underline-animation"
             >
               <b>Pricing</b>
-            </a>
-            <a
-              href="/pricing"
+            </Link>
+            <Link
+              href="/howitworks"
               className="font-semibold hover-underline-animation"
             >
               How it works?
-            </a>
+            </Link>
           </div>
           <div className="flex-none">
             <div className="dropdown dropdown-end">
@@ -56,7 +199,6 @@ export default function Header() {
                       type="checkbox"
                       onClick={() => {
                         store.dispatch(changedTheme());
-                        console.log(store.getState().theme.theme);
                       }}
                     />
                     <svg
@@ -79,8 +221,11 @@ export default function Header() {
               </SignedIn>
               <SignedOut>
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                  <div className="w-10 rounded-full">
-                    <FontAwesomeIcon icon={faRightToBracket} />
+                  <div className="flex w-10 rounded-full justify-center align-middle">
+                    <FontAwesomeIcon
+                      icon={faRightToBracket}
+                      className="text-[38px]"
+                    />
                   </div>
                 </label>
               </SignedOut>
