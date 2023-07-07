@@ -184,7 +184,7 @@ export default function Header() {
   const router = useRouter();
   const theme = useSelector((state: any) => state.theme.theme);
   return (
-    <header className="h-[75px]">
+    <header className="h-[66px]">
       <nav className="fixed top-0 w-full z-10">
         <div className="navbar bg-base-100 justify-between">
           <div className="flex-1 flex-grow-0 w-fit gap-1">

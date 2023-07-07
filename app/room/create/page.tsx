@@ -1,7 +1,10 @@
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHandPointRight,
+  faPlusCircle,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function Pricing() {
+export default async function CreateRoom() {
   return (
     <>
       <h1
@@ -15,7 +18,7 @@ export default function Pricing() {
         <FontAwesomeIcon icon={faPlusCircle} /> Create new <b>ROOM</b>
       </h1>
       <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content flex-col lg:flex-row-reverse max-w-5xl">
+        <div className="hero-content flex-col md:flex-row-reverse max-w-5xl">
           <div className="text-center lg:text-left">
             <h1 className="text-4xl font-bold">
               This is what the cover of your <b>group</b> will look like!
@@ -34,10 +37,23 @@ export default function Pricing() {
               />
             </figure>
             <div className="card-body">
-              <h2 className="card-title">Shoes!</h2>
+              <h2 className="card-title w-full relative">
+                <p className="pr-8">Bakar! Trip to SAHARA!</p>
+                <span className="absolute right-0">🌵</span>
+              </h2>
               <p>If a dog chews shoes whose shoes does he choose?</p>
-              <div className="card-actions justify-end">
-                <button className="btn btn-primary">Buy Now</button>
+              <div className="card-actions flex w-full justify-between align-middle">
+                <div>
+                  <div className="avatar">
+                    <div className="h-11 rounded">
+                      <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                    </div>
+                  </div>
+                </div>
+                <button className="btn btn-primary">
+                  <b>JOIN</b>
+                  <FontAwesomeIcon icon={faHandPointRight} />
+                </button>
               </div>
             </div>
           </div>
