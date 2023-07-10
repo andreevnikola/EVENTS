@@ -13,9 +13,7 @@ export default function CustomHtmlTag({
   const theme = useSelector((state: any) => state.theme.theme);
 
   useEffect(() => {
-    console.log("BBG");
     store.dispatch(setupTheme());
-    console.log(theme);
   });
 
   return (

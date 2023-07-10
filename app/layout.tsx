@@ -1,19 +1,20 @@
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkLoading, ClerkProvider } from "@clerk/nextjs";
 import Header from "../components/Header";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Providers from "../components/Provider";
 import CustomHtmlTag from "@/components/CustomHtmlTag";
 import Footer from "@/components/Footer";
+import LoadingComponent from "@/components/Loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "ShareIT",
-  description: "Group, Transfer, Enjoy",
+  title: "EVENTS - Organise, Group, Enjoy",
+  description: "Organise, Group, Enjoy",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -24,6 +25,9 @@ export default function RootLayout({
         <CustomHtmlTag>
           <body className={inter.className}>
             <Header />
+            <ClerkLoading>
+              <LoadingComponent />
+            </ClerkLoading>
             {children}
             <Footer />
           </body>

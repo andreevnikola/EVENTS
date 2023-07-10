@@ -42,7 +42,8 @@ function SideMenu() {
         <label htmlFor="my-drawer" className="btn btn-primary drawer-button">
           <FontAwesomeIcon
             icon={faBars}
-            className={`-rotate-${opened ? "45" : "0"} transition-all`}
+            className="transition-all"
+            style={{ rotate: (opened ? "-90" : "-0") + `deg` }}
           />
         </label>
       </div>
@@ -193,12 +194,12 @@ export default function Header() {
               onClick={() => {
                 router.push("/");
               }}
-              className="btn btn-ghost normal-case text-xl z-10"
+              className="btn btn-ghost normal-case text-xl z-10 px-0 ml-2"
             >
               <img
                 src={`/branding/${theme}_theme/logo.png`}
                 alt=" ShareIT"
-                className="h-full w-auto z-0"
+                className="h-full z-0"
               />
             </button>
           </div>
