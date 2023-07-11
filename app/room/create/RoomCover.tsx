@@ -5,6 +5,7 @@ import {
   faForwardStep,
   faHandPointRight,
   faPenToSquare,
+  faQuestionCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
@@ -12,6 +13,13 @@ import { useState } from "react";
 export default function RoomCover(user: any) {
   user = user.user;
   const [isEditing, setIsEditing] = useState<boolean>(false);
+
+  const [title, setTitle] = useState("Enter a title!");
+  const [description, setDescription] = useState(
+    "Write a short and hooking up description of your room and the event!"
+  );
+  const [emoji, setEmoji] = useState("🌵");
+
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col md:flex-row-reverse max-w-5xl w-[90%] p-0 py-10">
@@ -31,7 +39,7 @@ export default function RoomCover(user: any) {
                 setIsEditing(!isEditing);
               }}
             >
-              {!isEditing ? "Preview" : "Edit"}{" "}
+              {isEditing ? "Preview" : "Edit"}{" "}
               <FontAwesomeIcon icon={!isEditing ? faEye : faPenToSquare} />
             </button>
             <button className="btn btn-primary flex flex-grow">
@@ -45,15 +53,80 @@ export default function RoomCover(user: any) {
               src="/images/please_upload_cover_image.png"
               alt="Please upload cover image"
             />
+            <div className="absolute top-2 right-2 py-1 px-4 rounded-full backdrop-filter backdrop-blur-lg backdrop-brightness-[0.65] flex flex-row gap-2">
+              {!isEditing && (
+                <>
+                  <span className="rounded-full bg-red-500 h-[22px] w-[22px] -ml-2" />
+                  <span className="w-fit font-bold">
+                    Private{" "}
+                    <div
+                      className="tooltip tooltip-left"
+                      data-tip="Only invited members will be able to join!"
+                    >
+                      <FontAwesomeIcon
+                        icon={faQuestionCircle}
+                        className="text-sm ml-1"
+                      />
+                    </div>
+                  </span>
+                </>
+              )}
+              {isEditing && (
+                <>
+                  <select className="select w-full max-w-xs select-sm bg-transparent">
+                    <option disabled selected>
+                      Change <b>visibility</b>
+                    </option>
+                    <option>Private</option>
+                    <option>Hidden</option>
+                    <option>Public</option>
+                  </select>
+                </>
+              )}
+            </div>
           </figure>
           <div className="card-body">
             <div className="card-title w-full relative">
-              <p className="pr-8">Enter a TITLE!</p>
-              <span className="absolute right-0">🌵</span>
+              {!isEditing && <p className="mr-8 pr-0">{title}</p>}
+              {isEditing && (
+                <input
+                  className="mr-10 w-full input input-bordered"
+                  placeholder="Enter a title:"
+                  type="text"
+                  value={title}
+                  onChange={(e) => {
+                    setTitle(e.target.value);
+                  }}
+                ></input>
+              )}
+              <span className="absolute right-0">
+                {!isEditing ? (
+                  emoji
+                ) : (
+                  <input
+                    type="text"
+                    className="input input-bordered p-0 pl-2.5 w-9"
+                    placeholder="🌵"
+                    value={emoji}
+                    onChange={(e) => {
+                      setEmoji(e.target.value);
+                    }}
+                  />
+                )}
+              </span>
             </div>
             <p>
-              Please write a short and hooking up description of your room for
-              the event!
+              {!isEditing && <>{description}</>}
+              {isEditing && (
+                <textarea
+                  className="textarea textarea-bordered w-full"
+                  placeholder="Write a short and hooking up description of your room for the event!"
+                  value={description}
+                  onChange={(e) => {
+                    setDescription(e.target.value);
+                  }}
+                ></textarea>
+              )}
             </p>
             <div className="card-actions flex w-full justify-between align-middle">
               <div
