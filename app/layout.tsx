@@ -6,6 +6,7 @@ import Providers from "../components/Provider";
 import CustomHtmlTag from "@/components/CustomHtmlTag";
 import Footer from "@/components/Footer";
 import LoadingComponent from "@/components/Loading";
+import UserData from "@/components/UserData";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default async function RootLayout({
       <Providers>
         <CustomHtmlTag>
           <body className={inter.className}>
+            <UserData />
             <Header />
             <ClerkLoading>
               <LoadingComponent />

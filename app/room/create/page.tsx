@@ -2,7 +2,7 @@ import { currentUser } from "@clerk/nextjs";
 // import { store } from "@/redux/store";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import RoomCover from "./RoomCover";
+import RoomInfo from "./RoomInfo";
 
 function TitleBanner() {
   return (
@@ -21,10 +21,11 @@ function TitleBanner() {
 
 export default async function CreateRoom() {
   const user = await currentUser();
+
   return (
     <>
       <TitleBanner />
-      <RoomCover user={user} />
+      <RoomInfo user={user} />
     </>
   );
 }
